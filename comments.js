@@ -1,77 +1,69 @@
-// create a web server that supports basic CRUD operations on member
-// comments.  This server will be used to support the front-end
-// commenting system.  The server will support the following routes:
-// - GET /comments - returns the list of comments
-// - POST /comments - creates a new comment
-// - GET /comments/:id - returns a specific comment
-// - PUT /comments/:id - updates a specific comment
-// - DELETE /comments/:id - deletes a specific comment
-
+// Create web server
 const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+// Create a route that sends a GET request to the root URL
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage');
+});
 
+// Create a route that sends a GET request to the /comments URL
 app.get('/comments', (req, res) => {
-    fs.readFile('./comments.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('An error occurred while attempting to read comments');
-            return;
-        }
-
-        res.json(JSON.parse(data));
-    });
+  res.send('Welcome to the comments page');
 });
 
-app.post('/comments', (req, res) => {
-    fs.readFile('./comments.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('An error occurred while attempting to read comments');
-            return;
-        }
-
-        const comments = JSON.parse(data);
-
-        const newComment = req.body;
-        newComment.id = comments.length + 1;
-        comments.push(newComment);
-
-        fs.writeFile('./comments.json', JSON.stringify(comments), 'utf8', (err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('An error occurred while attempting to write comments');
-                return;
-            }
-
-            res.json(newComment);
-        });
-    });
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
-app.get('/comments/:id', (req, res) => {
-    fs.readFile('./comments.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('An error occurred while attempting to read comments');
-            return;
-        }
+// Run the server with node comments.js
+// Go to http://localhost:3000 in your browser to see the homepage
+// Go to http://localhost:3000/comments in your browser to see the comments page
 
-        const comments = JSON.parse(data);
+// Path: comments.js
+// Create web server
+const express = require('express');
+const app = express();
+const port = 3000;
 
-        const id = parseInt(req.params.id);
-        const comment = comments.find(c => c.id === id);
-        if (!comment) {
-            res.status(404).send('Comment not found');
-            return;
-        }
-
-        res.json(comment);
-    });
+// Create a route that sends a GET request to the root URL
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage');
 });
 
-app.put('/comments/:id', (req,
+// Create a route that sends a GET request to the /comments URL
+app.get('/comments', (req, res) => {
+  res.send('Welcome to the comments page');
+});
+
+// Create a route that sends a GET request to the /comments/1 URL
+app.get('/comments/1', (req, res) => {
+  res.send('Welcome to the first comment');
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+
+// Run the server with node comments.js
+// Go to http://localhost:3000 in your browser to see the homepage
+// Go to http://localhost:3000/comments in your browser to see the comments page
+// Go to http://localhost:3000/comments/1 in your browser to see the first comment
+
+// Path: comments.js
+// Create web server
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// Create a route that sends a GET request to the root URL
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage');
+});
+
+// Create a route that sends a GET request to the /comments URL
+app.get('/comments', (req, res) => {
+  res.send('Welcome to the comments
